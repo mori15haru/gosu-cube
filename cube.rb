@@ -1,6 +1,8 @@
-#cube.rb
 require 'gosu'
-require './display'
+require_relative 'display'
+require_relative 'transformation/projection'
+require_relative 'transformation/rotation'
+require_relative 'transformation/coordinate'
 
 class Cube
   #Variables for visualising
@@ -16,33 +18,49 @@ class Cube
 
   def initialize
     @vertices = [-@@l, @@l].repeated_permutation(3).to_a
-    @rotation = Transformation::Rotation
     @perspective = false
-    @display = Display::Orthographic
-  end
-
-  def rotate(axis, theta)
-    @rotation::set_theta(theta)
-    @vertices.map! { |v| @rotation.apply(axis, v) }
   end
 
   def draw
-    #apply projection and gosu coordinate
-    vertices_to_render = @vertices.map { |v| @display.apply(v) }
-    vertices_to_gosu = vertices_to_render.map { |v| Display::GosuCoordinate::convert(v) }
-    #draw vertices
-    vertices_to_gosu.each { |v| Display::Draw::point(v) }
-    #draw edges
-    @@edges.each { |e| Display::Draw::line(vertices_to_gosu[e[FROM]], vertices_to_gosu[e[TO]]) }
+    draw_vertices
+    draw_edges
+  end
+
+  def rotate(axis, theta)
+    Transformation::Rotation.matrix(axis, theta).tap do |mRotate|
+      @vertices.map! { |v| mRotate * v }
+    end
   end
 
   def update_perspective
     @perspective = !@perspective
+   end
+
+  private
+
+  def projection
     if @perspective
-      @display = Display::Perspective
+      Transformation::Projection::Perspective
     else
-      @display = Display::Orthographic
+      Transformation::Projection::Orthographic
     end
   end
 
+  def draw_vertices
+    vertices_to_render.each { |v| Display::Draw::point(v) }
+  end
+
+  def draw_edges
+    @@edges.each { |e| Display::Draw::line(vertices_to_render[e[FROM]], vertices_to_render[e[TO]]) }
+  end
+
+  def vertices_to_render
+    # gosu coordinate
+    vertices_projected.map { |v| Transformation::GosuCoordinate.matrix * (v << 1) }
+  end
+
+  def vertices_projected
+    # apply perspective/orthographic projection
+    @vertices.map { |v| projection.matrix(v) * v }
+  end
 end
