@@ -1,4 +1,3 @@
-#sim.rb
 require 'gosu'
 require './cube'
 
