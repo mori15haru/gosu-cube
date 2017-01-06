@@ -8,15 +8,15 @@ It will draw a cube in 3D space, with the center at [0, 0, 0], and with the dime
 ```ruby sim.rb```
 
 ##Apply perspective
-* 'P' : applies/undoes the perspective
+* `P` : applies/undoes the perspective
 
 ##Rotate the cube
-* 'J' : rotates the cube by 20 degrees along +x
-* 'K' : -x
-* 'H' : +y
-* 'L' : -y
-* 'A' : +z
-* 'S' : -z
+* `J` : rotates the cube by 20 degrees along +x
+* `K` : -x
+* `H` : +y
+* `L` : -y
+* `A` : +z
+* `S` : -z
 
 ##Hide occluded edges
 **master** (left) and **feature/do-not-show-hidden-edges** branch (right)
