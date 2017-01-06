@@ -18,4 +18,8 @@ It will draw a cube in 3D space, with the center at [0, 0, 0], and with the dime
 * 'A' : +z
 * 'S' : -z
 
-For now, there is only one coordinate system :P
+##Hide occluded edges
+
+master
+
+feature/do-not-show-hidden-edges
