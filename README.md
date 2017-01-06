@@ -20,4 +20,5 @@ It will draw a cube in 3D space, with the center at [0, 0, 0], and with the dime
 
 ##Hide occluded edges
 **master** vs **feature/do-not-show-hidden-edges**
+
 <img src="https://github.com/mori15haru/gosu-cube/blob/master/master.png" width="300"> <img src="https://github.com/mori15haru/gosu-cube/blob/master/branch.png" width="300">
