@@ -19,7 +19,8 @@ It will draw a cube in 3D space, with the center at [0, 0, 0], and with the dime
 * 'S' : -z
 
 ##Hide occluded edges
-
 master
+![master](https://github.com/mori15haru/gosu-cube/blob/master/master.png = 100x)
 
 feature/do-not-show-hidden-edges
+![branch](https://github.com/mori15haru/gosu-cube/blob/master/branch.png = 100x)
